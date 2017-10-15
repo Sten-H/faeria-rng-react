@@ -1,0 +1,14 @@
+export const ADD_DRAW_CARD = 'ADD_DRAW_CARD';
+export type ADD_DRAW_CARD = typeof ADD_DRAW_CARD;
+
+export const REMOVE_DRAW_CARD = 'REMOVE_DRAW_CARD';
+export type REMOVE_DRAW_CARD = typeof REMOVE_DRAW_CARD;
+
+export const ADD_CREATURE_CARD = 'ADD_CREATURE_CARD';
+export type ADD_CREATURE_CARD = typeof ADD_CREATURE_CARD;
+
+export const REMOVE_CREATURE_CARD = 'REMOVE_CREATURE_CARD';
+export type REMOVE_CREATURE_CARD = typeof REMOVE_CREATURE_CARD;
+
+export const UPDATE_CARD = 'UPDATE_CARD';
+export type UPDATE_CARD = typeof UPDATE_CARD;
