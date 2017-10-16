@@ -3,11 +3,16 @@ export interface DrawCardState {
     needed: number;
     total: number;
 }
-// interface CreatureCardState {
-//     hp: number;
-//     toDie: boolean;
-// }
+export interface CreatureCardState {
+    id: number;
+    hp: number;
+    toDie: boolean;
+}
+export interface DrawSettingsState {
+    draws: number;
+    mulligan: boolean;
+}
 export interface StoreState {
-    // creatureCards: Array<CreatureCardState>;
-    cards: Array<DrawCardState>;
+    drawSettings: DrawSettingsState;
+    drawCards: DrawCardState[];
 }

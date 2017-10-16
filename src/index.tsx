@@ -14,7 +14,7 @@ import './index.css';
 // const store = createStore<StoreState>(reducers, {
 //     // creatureCards: [
 //     // ],
-//     cards: [
+//     drawCards: [
 //     ],
 // });
 const store = createStore<StoreState>(reducers);

@@ -1,3 +1,5 @@
+@import url('http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext');
+
 html, body {
     /*color: white;*/
     background: #023E4F;
@@ -25,8 +27,15 @@ hr {
 
 .card {
     color: white;
+    text-align: center;
 }
-
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato Thin', sans-serif;
+}
+.lead {
+    font-family: 'Lato Thin', sans-serif;
+    font-size: 1.3em;
+}
 /* Card columns amount at different resolutions */
 @media (max-width: 575px) {
     html {

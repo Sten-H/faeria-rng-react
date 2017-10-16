@@ -1,11 +1,9 @@
-import { CardAction } from '../actions';
+import { DrawCardAction } from '../actions/draw';
 // import {DrawCardState} from '../types/index';
 import * as constants from '../constants/index';
-import {DrawCardState} from '../types/index';
-// import {DrawCardState} from '../types/index';
+import { DrawCardState } from '../types/index';
 
-
-export default function cards(state: DrawCardState[], action: CardAction): DrawCardState[] {
+export default function drawCards(state: DrawCardState[], action: DrawCardAction): DrawCardState[] {
     switch (action.type) {
         case constants.ADD_DRAW_CARD:
             return [
@@ -16,7 +14,7 @@ export default function cards(state: DrawCardState[], action: CardAction): DrawC
             return state.filter((card) => card.id !== action.id);
         case constants.UPDATE_DRAW_CARD:
             return state.map((card) => {
-                if(card.id !== action.id) {
+                if (card.id !== action.id) {
                     return card;
                 } else {
                     const newCard = {
@@ -24,14 +22,10 @@ export default function cards(state: DrawCardState[], action: CardAction): DrawC
                         [action.targetName]: action.value,
                     };
                     // Make certain needed never exceeds total in deck
-                    newCard.needed = Math.min(newCard.needed, card.total);
+                    newCard.needed = Math.min(newCard.needed, newCard.total);
                     return newCard;
                 }
             });
-        // case constants.ADD_CREATURE_CARD:
-        //     return state;
-        // case constants.REMOVE_CREATURE_CARD:
-        //     return state;
         default:
             return [];
     }

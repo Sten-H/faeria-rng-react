@@ -1,36 +1,22 @@
 import * as constants from '../constants';
-
+import {SyntheticEvent} from 'react';
 let nextDrawId = -1;
-// let nextCreatureId = 0;
 
 export interface AddDrawCard {
     id: number;
     type: constants.ADD_DRAW_CARD;
 }
-
-export interface AddCreatureCard {
-    id: number;
-    type: constants.ADD_CREATURE_CARD;
-}
-
 export interface RemoveDrawCard {
     id: number;
     type: constants.REMOVE_DRAW_CARD;
-}
-
-export interface RemoveCreatureCard {
-    type: constants.REMOVE_CREATURE_CARD;
 }
 
 export interface UpdateCard {
     id: number;
     value: number;
     targetName: string;
-    type: constants.UPDATE_CARD;
+    type: constants.UPDATE_DRAW_CARD;
 }
-export type AddCardAction = AddDrawCard | AddCreatureCard;
-export type RemoveCardAction = RemoveDrawCard | RemoveCreatureCard;
-export type CardAction = AddCardAction | RemoveCardAction | UpdateCard;
 
 export const addDrawCard = (): AddDrawCard => {
     nextDrawId += 1;
@@ -39,6 +25,7 @@ export const addDrawCard = (): AddDrawCard => {
         type: constants.ADD_DRAW_CARD
     };
 };
+export type DrawCardAction = AddDrawCard | RemoveDrawCard | UpdateCard;
 
 export const removeDrawCard = (id: number): RemoveDrawCard =>  {
     return {
@@ -47,11 +34,11 @@ export const removeDrawCard = (id: number): RemoveDrawCard =>  {
     };
 };
 
-export const updateCard = (id: number, evt: any): UpdateCard => {
+export const updateCard = (id: number, evt: SyntheticEvent<HTMLInputElement>): UpdateCard => {
     return {
         id: id,
-        value: evt.target.value,
-        targetName: evt.target.name,
-        type: constants.UPDATE_CARD
+        value: parseInt(evt.currentTarget.value, 10),
+        targetName: evt.currentTarget.name,
+        type: constants.UPDATE_DRAW_CARD
     };
 };

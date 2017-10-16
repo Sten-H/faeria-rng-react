@@ -1,14 +1,15 @@
 import DrawCard from '../components/DrawCard';
-// import { StoreState } from '../types';
 import { connect, Dispatch } from 'react-redux';
-import * as actions from '../actions';
+import * as actions from '../actions/draw';
+import { StoreState } from '../types/index';
+import { SyntheticEvent } from 'react';
 
 interface InitialValues {
     id: number;
     needed: number;
     total: number;
 }
-const mapStateToProps = (state: any, { id, needed, total }: InitialValues) => {
+const mapStateToProps = (state: StoreState, { id, needed, total }: InitialValues) => {
     return {
         id,
         needed,
@@ -16,10 +17,10 @@ const mapStateToProps = (state: any, { id, needed, total }: InitialValues) => {
     };
 };
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.RemoveCardAction>) {
+export function mapDispatchToProps(dispatch: Dispatch<actions.DrawCardAction>) {
     return {
-        onChange: (id: number, evt: any) => dispatch(actions.updateCard(id, evt)),
-        onRemove: (evt: any) => dispatch(actions.removeDrawCard(evt)),
+        onChange: (id: number, evt: SyntheticEvent<HTMLInputElement>) => dispatch(actions.updateCard(id, evt)),
+        onRemove: (id: number) => dispatch(actions.removeDrawCard(id)),
     };
 }
 

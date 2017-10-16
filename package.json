@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react-icons": "^2.2.3",
     "@types/react-redux": "^5.0.10",
     "@types/react-router-dom": "^4.0.8",
     "@types/reactstrap": "^4.6.4",
@@ -10,6 +11,7 @@
     "jquery": "^3.2.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-icons": "^2.2.7",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts-ts": "2.7.0",
@@ -26,6 +28,7 @@
     "@types/jest": "^21.1.2",
     "@types/node": "^8.0.34",
     "@types/react": "^16.0.10",
-    "@types/react-dom": "^16.0.1"
+    "@types/react-dom": "^16.0.1",
+    "tslint-react": "^3.2.0"
   }
 }

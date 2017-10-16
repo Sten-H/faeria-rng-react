@@ -1,24 +1,18 @@
 import * as React from 'react';
 import { Card, CardBody, CardTitle, Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
 import TiTrash from 'react-icons/lib/ti/trash';
+import './DrawCard.css';
 
 export interface DrawCardProps {
-    id: number,
+    id: number;
     needed: number;
     total: number;
-    onRemove: (evt: any) => void;
-    onChange: (id: number, evt: any) => void;
+    onRemove: (id: number ) => void;
+    onChange: (id: number, evt: React.FormEvent<HTMLInputElement>) => void;
 }
-//
-// export interface CreatureCardProps {
-//     id: number;
-//     hp: number;
-//     toDie: boolean;
-// }
-// export type CardProps = DrawCardProps | CreatureCardProps;
-export const InputCard = ({ id, needed, total, onRemove, onChange}: DrawCardProps) => {
+const DrawCard = ({ id, needed, total, onRemove, onChange}: DrawCardProps) => {
     return (
-        <Card color="primary">
+        <Card className="draw">
             <CardBody>
                 <CardTitle>Card</CardTitle>
                 <Form>
@@ -43,16 +37,9 @@ export const InputCard = ({ id, needed, total, onRemove, onChange}: DrawCardProp
                         </Col>
                     </FormGroup>
                 </Form>
-                {/*<label>*/}
-                    {/*Needed:*/}
-                    {/*<input type="number" name="needed" value={needed} onChange={(evt) => onChange(id, evt)} />*/}
-                {/*</label>*/}
-                {/*<label>*/}
-                    {/*In deck:*/}
-                    {/*<input type="number" name="total" value={total} onChange={(evt) => onChange(id, evt)} />*/}
-                {/*</label>*/}
-                    <Button block color="danger" onClick={() => onRemove(id)}>Delete <TiTrash size={"2em"} /></Button>
+                    <Button block color="danger" onClick={() => onRemove(id)}>Delete <TiTrash size={'2em'} /></Button>
             </CardBody>
         </Card>
     );
 };
+export default DrawCard;
