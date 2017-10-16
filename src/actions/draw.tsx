@@ -1,5 +1,5 @@
 import * as constants from '../constants';
-import {SyntheticEvent} from 'react';
+import { SyntheticEvent } from 'react';
 let nextDrawId = -1;
 
 export interface AddDrawCard {
@@ -42,3 +42,7 @@ export const updateCard = (id: number, evt: SyntheticEvent<HTMLInputElement>): U
         type: constants.UPDATE_DRAW_CARD
     };
 };
+
+export interface CalculateDraw {
+
+}

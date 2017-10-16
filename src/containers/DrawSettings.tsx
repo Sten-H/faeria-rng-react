@@ -2,6 +2,7 @@ import DrawSettings from '../components/DrawSettings';
 import { connect, Dispatch } from 'react-redux';
 import * as actions from '../actions/drawSettings';
 import { StoreState } from '../types/index';
+import { SyntheticEvent } from 'react';
 
 const mapStateToProps = ({drawSettings: {draws = 10, mulligan = false} = {}}: StoreState) => {
     return {
@@ -10,9 +11,10 @@ const mapStateToProps = ({drawSettings: {draws = 10, mulligan = false} = {}}: St
     };
 };
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.UpdateDrawSettingsAction>) {
+export function mapDispatchToProps(dispatch: Dispatch<actions.DrawSettingsAction>) {
     return {
-        onChange: () => dispatch(actions.updateCard()),
+        onChangeDrawAmount: (evt: SyntheticEvent<HTMLInputElement>) => dispatch(actions.updateDrawAmount(evt)),
+        onChangeMulligan: (evt: SyntheticEvent<HTMLInputElement>) => dispatch(actions.updateMulligan(evt)),
         // onRemove: (id: number) => dispatch(actions.removeDrawCard(id)),
     };
 }

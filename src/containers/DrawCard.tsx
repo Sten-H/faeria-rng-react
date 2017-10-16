@@ -1,19 +1,14 @@
 import DrawCard from '../components/DrawCard';
 import { connect, Dispatch } from 'react-redux';
 import * as actions from '../actions/draw';
-import { StoreState } from '../types/index';
+import { DrawCardState, StoreState } from '../types/index';
 import { SyntheticEvent } from 'react';
 
-interface InitialValues {
-    id: number;
-    needed: number;
-    total: number;
-}
-const mapStateToProps = (state: StoreState, { id, needed, total }: InitialValues) => {
+const mapStateToProps = ({drawCards}: StoreState,   {id, needed, total}: DrawCardState) => {
     return {
         id,
         needed,
-        total,
+        total
     };
 };
 

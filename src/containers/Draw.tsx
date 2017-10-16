@@ -11,7 +11,7 @@ const mapStateToProps = (state: StoreState) => {
 
 export function mapDispatchToProps(dispatch: Dispatch<actions.DrawCardAction>) {
     return {
-        onAdd: () => dispatch(actions.addDrawCard())
+        onAdd: () => dispatch(actions.addDrawCard()),
     };
 }
 

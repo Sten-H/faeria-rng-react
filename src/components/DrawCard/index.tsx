@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Card, CardBody, CardTitle, Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+import { SyntheticEvent } from 'react';
 import TiTrash from 'react-icons/lib/ti/trash';
+
 import './DrawCard.css';
 
 export interface DrawCardProps {
@@ -8,9 +10,9 @@ export interface DrawCardProps {
     needed: number;
     total: number;
     onRemove: (id: number ) => void;
-    onChange: (id: number, evt: React.FormEvent<HTMLInputElement>) => void;
+    onChange: (id: number, evt: SyntheticEvent<HTMLInputElement>) => void;
 }
-const DrawCard = ({ id, needed, total, onRemove, onChange}: DrawCardProps) => {
+export const DrawCard = ({ id, needed, total, onRemove, onChange}: DrawCardProps) => {
     return (
         <Card className="draw">
             <CardBody>

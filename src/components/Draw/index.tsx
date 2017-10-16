@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import TiLeft from 'react-icons/lib/ti/chevron-left-outline';
 import InputCard from '../../containers/DrawCard';
 import DrawSettings from '../../containers/DrawSettings';
-
+import Calculate from '../Calculate';
 import './Draw.css';
 
 export interface DrawProps {
@@ -47,13 +47,9 @@ export const Draw = ({cards, onAdd}: DrawProps) => {
                 block
             >Add card
             </Button>
-            <Button
-                className="calculate"
-                color="primary"
-                onClick={onAdd}
-                block
-            >Calculate
-            </Button>
+            <Calculate />
         </div>
     );
 };
+
+export default Draw;

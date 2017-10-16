@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router';
 import { Home } from './Home/index';
 import { Page } from './SiteTemplates/Page';
 import { Header } from './SiteTemplates/Header';
-// import { Draw } from './Draw/index';
 import { Ping } from './Ping/index';
 import Draw from '../containers/Draw';
 

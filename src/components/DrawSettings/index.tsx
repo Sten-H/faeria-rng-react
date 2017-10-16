@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { Card, CardBody, CardTitle, Form, Label, Input, FormGroup, Col } from 'reactstrap';
 import './DrawSettings.css';
+import { SyntheticEvent } from 'react';
 
 interface DrawSettingProps {
     draws: number;
     mulligan: boolean;
-    onChange: () => void;
+    onChangeDrawAmount: (evt: SyntheticEvent<HTMLInputElement>) => void;
+    onChangeMulligan: (evt: SyntheticEvent<HTMLInputElement>) => void;
 }
-const DrawSettings = ({draws, mulligan}: DrawSettingProps) => (
+export const DrawSettings = ({draws, mulligan, onChangeDrawAmount, onChangeMulligan}: DrawSettingProps) => (
     <Card className="settings">
         <CardBody>
             <CardTitle>Settings</CardTitle>
@@ -18,6 +20,7 @@ const DrawSettings = ({draws, mulligan}: DrawSettingProps) => (
                             type="checkbox"
                             name="mulligan"
                             checked={mulligan}
+                            onChange={onChangeMulligan}
                         />
                         <span>Include mulligan (slow)</span>
                     </Label>
@@ -28,7 +31,9 @@ const DrawSettings = ({draws, mulligan}: DrawSettingProps) => (
                         <Input
                             type="number"
                             name="draws"
-                            value={draws}/>
+                            value={draws}
+                            onChange={onChangeDrawAmount}
+                        />
                     </Col>
                 </FormGroup>
             </Form>

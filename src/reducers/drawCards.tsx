@@ -3,12 +3,12 @@ import { DrawCardAction } from '../actions/draw';
 import * as constants from '../constants/index';
 import { DrawCardState } from '../types/index';
 
-export default function drawCards(state: DrawCardState[], action: DrawCardAction): DrawCardState[] {
+export default function drawCards(state: DrawCardState[] = [], action: DrawCardAction): DrawCardState[] {
     switch (action.type) {
         case constants.ADD_DRAW_CARD:
             return [
                 ...state,
-                { id: action.id, needed: 1, total: 3 }
+                {id: action.id, needed: 1, total: 3},
             ];
         case constants.REMOVE_DRAW_CARD:
             return state.filter((card) => card.id !== action.id);
@@ -27,6 +27,6 @@ export default function drawCards(state: DrawCardState[], action: DrawCardAction
                 }
             });
         default:
-            return [];
+            return state;
     }
 }
