@@ -21,17 +21,21 @@ body {
     /* Footer area */
     margin-bottom: 2.5em;
 }
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato Thin', sans-serif;
+}
 hr {
     border-color: rgba(188,166,101, 0.7);
 }
-
+a, a:hover, a:visited {
+    color: #BCA665;
+    text-decoration: underline;
+}
 .card {
     color: white;
     text-align: center;
 }
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lato Thin', sans-serif;
-}
+
 .lead {
     font-family: 'Lato Thin', sans-serif;
     font-size: 1.3em;

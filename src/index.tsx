@@ -17,7 +17,7 @@ import './index.css';
 //     drawCards: [
 //     ],
 // });
-const store = createStore<StoreState>(reducers);
+export const store = createStore<StoreState>(reducers);
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

@@ -1,5 +1,4 @@
 import { DrawCardAction } from '../actions/draw';
-// import {DrawCardState} from '../types/index';
 import * as constants from '../constants/index';
 import { DrawCardState } from '../types/index';
 

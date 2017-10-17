@@ -1,4 +1,4 @@
-import { Draw } from '../components/Draw';
+import Draw from '../components/Draw';
 import * as actions from '../actions/draw';
 import { StoreState } from '../types';
 import { connect, Dispatch } from 'react-redux';

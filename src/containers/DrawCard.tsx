@@ -1,4 +1,4 @@
-import DrawCard from '../components/DrawCard';
+import DrawCard from '../components/Draw/DrawCard';
 import { connect, Dispatch } from 'react-redux';
 import * as actions from '../actions/draw';
 import { DrawCardState, StoreState } from '../types/index';

@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router';
 import { Home } from './Home/index';
-import { Page } from './SiteTemplates/Page';
-import { Header } from './SiteTemplates/Header';
-import { Ping } from './Ping/index';
+import { Page, Header, Footer } from './common/SiteTemplates';
 import Draw from '../containers/Draw';
+import { Ping } from './Ping/index';
 
 class MainContainer extends React.Component {
     render() {
@@ -21,6 +20,7 @@ class MainContainer extends React.Component {
         );
     }
 }
+
 const Main = () => (
         <MainContainer>
             <Switch>
@@ -30,10 +30,12 @@ const Main = () => (
             </Switch>
         </MainContainer>
 );
+
 const App = () => (
     <Page>
         <Header />
         <Main />
+        <Footer />
     </Page>
 );
 export default App;

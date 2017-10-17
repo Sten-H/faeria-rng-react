@@ -42,7 +42,3 @@ export const updateCard = (id: number, evt: SyntheticEvent<HTMLInputElement>): U
         type: constants.UPDATE_DRAW_CARD
     };
 };
-
-export interface CalculateDraw {
-
-}

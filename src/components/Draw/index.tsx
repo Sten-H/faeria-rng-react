@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import TiLeft from 'react-icons/lib/ti/chevron-left-outline';
 import InputCard from '../../containers/DrawCard';
 import DrawSettings from '../../containers/DrawSettings';
-import Calculate from '../Calculate';
+import Calculate from '../../containers/Calculate';
+import * as constants from '../../constants';
 import './Draw.css';
 
 export interface DrawProps {
@@ -24,6 +25,7 @@ const BackCard = () => (
         </CardBody>
     </Card>
 );
+
 export const Draw = ({cards, onAdd}: DrawProps) => {
     return (
         <div>
@@ -39,15 +41,15 @@ export const Draw = ({cards, onAdd}: DrawProps) => {
                             total={card.total}
                         />)}
                 </CardColumns>
+                <Button
+                    className="draw"
+                    color="info"
+                    onClick={onAdd}
+                    block
+                >Add card
+                </Button>
+                <Calculate type={constants.CALCULATE_DRAW}/>
             </div>
-            <Button
-                className="draw"
-                color="info"
-                onClick={onAdd}
-                block
-            >Add card
-            </Button>
-            <Calculate />
         </div>
     );
 };

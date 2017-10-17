@@ -8,3 +8,5 @@ export const Header = () => (
         <p className="lead text-highlight">Start complaining more accurately</p>
     </header>
 );
+
+export default Header;

@@ -24,3 +24,9 @@ export type UPDATE_DRAW_MULLIGAN = typeof UPDATE_DRAW_MULLIGAN;
 
 export const MAX_DRAW_AMOUNT = 30;
 export const MIN_DRAW_AMOUNT = 3;
+
+export const CALCULATE_DRAW = 'CALCULATE_DRAW';
+export type CALCULATE_DRAW = typeof CALCULATE_DRAW;
+
+export const CALCULATE_PING = 'CALCULATE_PING';
+export type CALCULATE_PING = typeof CALCULATE_PING;

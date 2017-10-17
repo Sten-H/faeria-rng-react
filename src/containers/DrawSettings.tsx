@@ -1,4 +1,4 @@
-import DrawSettings from '../components/DrawSettings';
+import DrawSettings from '../components/Draw/DrawSettings';
 import { connect, Dispatch } from 'react-redux';
 import * as actions from '../actions/drawSettings';
 import { StoreState } from '../types/index';
