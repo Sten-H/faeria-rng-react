@@ -30,7 +30,7 @@ export default function results(result: ResultState = resultStateInitValue, acti
     switch (action.type) {
         case constants.CALCULATE_DRAW:
             // const newDraw = {...result.draw};
-            // const {drawCards, settings}= store.getState();
+            // const {creatureCards, settings}= store.getState();
             return {
                 ...result,
                 draw: doSomethingDraw(result.draw)

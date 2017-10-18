@@ -15,7 +15,7 @@ export default function settings(state: SettingsState = {drawAmount: 10, mulliga
                                  action: SettingsAction): SettingsState {
     switch (action.type) {
         case constants.UPDATE_NUMERIC_SETTING:
-            if(isNaN(action.value)) {
+            if (isNaN(action.value)) {
                 return state;
             }
             return {

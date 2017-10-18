@@ -28,5 +28,6 @@ export interface ResultState {
 export interface StoreState {
     settings: SettingsState;
     drawCards: DrawCardState[];
+    creatureCards: CreatureCardState[];
     results: ResultState;
 }

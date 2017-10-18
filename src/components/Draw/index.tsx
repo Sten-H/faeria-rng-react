@@ -29,7 +29,7 @@ export const Draw = ({cards, onAdd}: DrawProps) => {
                     />)}
             </CardColumns>
             <Button
-                className="draw"
+                className="add"
                 color="info"
                 onClick={onAdd}
                 block

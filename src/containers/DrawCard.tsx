@@ -1,8 +1,9 @@
 import DrawCard from '../components/Draw/DrawCard';
 import { connect, Dispatch } from 'react-redux';
-import * as actions from '../actions/draw';
 import { DrawCardState, StoreState } from '../types/index';
 import { SyntheticEvent } from 'react';
+import { removeDrawCard, updateCard } from '../actions/draw';
+import { InputAction } from '../actions/commonActions';
 
 const mapStateToProps = ({drawCards}: StoreState,   {id, needed, total}: DrawCardState) => {
     return {
@@ -12,10 +13,10 @@ const mapStateToProps = ({drawCards}: StoreState,   {id, needed, total}: DrawCar
     };
 };
 
-export function mapDispatchToProps(dispatch: Dispatch<actions.DrawCardAction>) {
+export function mapDispatchToProps(dispatch: Dispatch<InputAction>) {
     return {
-        onChange: (id: number, evt: SyntheticEvent<HTMLInputElement>) => dispatch(actions.updateCard(id, evt)),
-        onRemove: (id: number) => dispatch(actions.removeDrawCard(id)),
+        onChange: (id: number, evt: SyntheticEvent<HTMLInputElement>) => dispatch(updateCard(id, evt)),
+        onRemove: (id: number) => dispatch(removeDrawCard(id)),
     };
 }
 

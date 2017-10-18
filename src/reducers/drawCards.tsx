@@ -1,8 +1,8 @@
-import { DrawCardAction } from '../actions/draw';
 import * as constants from '../constants/index';
 import { DrawCardState } from '../types/index';
+import { InputAction } from '../actions/commonActions';
 
-const updateDrawCard = (cards: DrawCardState[], action: DrawCardAction) => {
+const updateDrawCard = (cards: DrawCardState[], action: InputAction) => {
     return cards.map((card) => {
         if (card.id !== action.id) {
             return card;
@@ -16,16 +16,19 @@ const updateDrawCard = (cards: DrawCardState[], action: DrawCardAction) => {
         }
     });
 };
-export default function drawCards(state: DrawCardState[] = [], action: DrawCardAction): DrawCardState[] {
+export default function drawCards(state: DrawCardState[] = [], action: InputAction): DrawCardState[] {
+    if (action.cardType !== constants.DRAW_CARD) {
+        return state;
+    }
     switch (action.type) {
-        case constants.ADD_DRAW_CARD:
+        case constants.ADD_INPUT_CARD:
             return [
                 ...state,
                 {id: action.id, needed: 1, total: 3},
             ];
-        case constants.REMOVE_DRAW_CARD:
+        case constants.REMOVE_INPUT_CARD:
             return state.filter((card) => card.id !== action.id);
-        case constants.UPDATE_DRAW_CARD:
+        case constants.UPDATE_INPUT_CARD:
             return updateDrawCard(state, action);
         default:
             return state;

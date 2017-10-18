@@ -1,19 +1,20 @@
-import Draw from '../components/Draw';
+import Ping from '../components/Ping';
+// import * as actions from '../actions/ping';
 import { StoreState } from '../types';
 import { connect, Dispatch } from 'react-redux';
 import { InputAction } from '../actions/commonActions';
-import { addDrawCard } from '../actions/draw';
+import { addCreatureCard } from '../actions/ping';
 
 const mapStateToProps = (state: StoreState) => {
     return {
-        cards: state.drawCards
+        cards: state.creatureCards
     };
 };
 
 export function mapDispatchToProps(dispatch: Dispatch<InputAction>) {
     return {
-        onAdd: () => dispatch(addDrawCard()),
+        onAdd: () => dispatch(addCreatureCard()),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Draw);
+export default connect(mapStateToProps, mapDispatchToProps)(Ping);

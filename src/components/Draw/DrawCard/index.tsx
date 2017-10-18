@@ -16,7 +16,7 @@ export const DrawCard = ({ id, needed, total, onRemove, onChange}: DrawCardProps
         <InputCard className="input" title="Card">
             <Form>
                 <FormGroup row>
-                    <Label sm={6}>Need</Label>
+                    <Label sm={6}>Need:</Label>
                     <Col sm={6}>
                         <Input type="select" name="needed" value={needed} onChange={(evt) => onChange(id, evt)} >
                             <option>{1}</option>
@@ -26,7 +26,7 @@ export const DrawCard = ({ id, needed, total, onRemove, onChange}: DrawCardProps
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label sm={6}>Deck</Label>
+                    <Label sm={6}>Deck:</Label>
                     <Col sm={6}>
                         <Input type="select" name="total" value={total} onChange={(evt) => onChange(id, evt)} >
                             <option>{1}</option>

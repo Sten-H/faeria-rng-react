@@ -3,14 +3,14 @@ import { Switch, Route } from 'react-router';
 import { Home } from './Home/index';
 import { Page, Header, Footer } from './common/SiteTemplates';
 import Draw from '../containers/Draw';
-import { Ping } from './Ping/index';
+import Ping from '../containers/Ping';
 
 class MainContainer extends React.Component {
     render() {
         return (
             <div className="container content">
                 <div className="row justify-content-center">
-                    <div className="col-12 col-lg-8">
+                    <div className="col-12 col-lg-10 col-xl-8">
                         {/*<div className="col-12 mt-0 mt-sm-3">*/}
                             {this.props.children}
                         {/*</div>*/}

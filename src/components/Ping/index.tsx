@@ -4,27 +4,29 @@ import { Button, CardColumns } from 'reactstrap';
 import Calculate from '../../containers/Calculate';
 import PingSettings from '../../containers/PingSettings';
 import BackCard from '../common/BackCard/BackCard';
+import { CreatureCardState } from '../../types/index';
+import { CreatureCard } from './CreatureCard/index';
 
-import { calculatePing } from '../../actions/calculate';
+export interface DrawProps {
+    cards: Array<CreatureCardState>;
+    onAdd: () => void;
+}
 
-export const Ping = () => {
+export const Ping = ({cards, onAdd}: DrawProps) => {
     return (
         <div className="col-12">
             <CardColumns>
                 <BackCard />
                 <PingSettings />
-                {/*{cards.map((card) =>*/}
-                    {/*<InputCard*/}
-                        {/*key={card.id}*/}
-                        {/*id={card.id}*/}
-                        {/*needed={card.needed}*/}
-                        {/*total={card.total}*/}
-                    {/*/>)}*/}
+                {cards.map((card) =>
+                    <CreatureCard
+                        key={card.id}
+                    />)}
             </CardColumns>
             <Button
-                className="draw"
+                className="add"
                 color="info"
-                onClick={calculatePing}
+                onClick={onAdd}
                 block
             >Add card
             </Button>
@@ -32,3 +34,4 @@ export const Ping = () => {
         </div>
     );
 };
+export default Ping;
