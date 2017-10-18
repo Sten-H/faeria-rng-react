@@ -6,7 +6,7 @@ interface CalculateProps {
     result: {
             timeTaken: number;
             desiredOutcomes: number;
-    }
+    };
     onCalculate: () => void;
 }
 // Returns results number as highlighted span or "---" text if uncalculated
@@ -14,7 +14,6 @@ const styleResult = (result: number): React.ReactElement<string> => (
     <span className="text-highlight">
         {(result >= 0) ? result.toString() : '---'}
     </span>);
-
 
 export const Calculate = ({result, onCalculate}: CalculateProps) => {
     return(
@@ -34,7 +33,7 @@ export const Calculate = ({result, onCalculate}: CalculateProps) => {
                 <p>Completed in {styleResult(result.timeTaken)} seconds</p>
             </div>
         </div>
-    )
+    );
 };
 
 export default Calculate;

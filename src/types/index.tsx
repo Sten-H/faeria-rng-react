@@ -8,10 +8,13 @@ export interface CreatureCardState {
     hp: number;
     toDie: boolean;
 }
-export interface DrawSettingsState {
-    draws: number;
+export interface SettingsState {
+    drawAmount: number;
+    pingAmount: number;
     mulligan: boolean;
+
 }
+
 export interface ResultState {
     draw: {
         desiredOutcomes: number;
@@ -23,7 +26,7 @@ export interface ResultState {
     }
 }
 export interface StoreState {
-    drawSettings: DrawSettingsState;
+    settings: SettingsState;
     drawCards: DrawCardState[];
     results: ResultState;
 }

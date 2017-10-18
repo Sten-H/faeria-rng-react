@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Button, CardColumns, Card, CardBody, CardTitle } from 'reactstrap';
+import { Button, CardColumns } from 'reactstrap';
+import * as constants from '../../constants';
 import { DrawCardState } from '../../types';
-import { Link } from 'react-router-dom';
-import TiLeft from 'react-icons/lib/ti/chevron-left-outline';
-import InputCard from '../../containers/DrawCard';
+import BackCard from '../common/BackCard/BackCard';
 import DrawSettings from '../../containers/DrawSettings';
 import Calculate from '../../containers/Calculate';
-import * as constants from '../../constants';
+import DrawCard from '../../containers/DrawCard';
+
 import './Draw.css';
 
 export interface DrawProps {
@@ -14,42 +14,28 @@ export interface DrawProps {
     onAdd: () => void;
 }
 
-const BackCard = () => (
-    <Card className="back">
-        <CardBody className="pb-0 pt-2">
-            <CardTitle>
-                <Link to="/">
-                    <TiLeft className="float-left" />Go Back
-                </Link>
-            </CardTitle>
-        </CardBody>
-    </Card>
-);
-
 export const Draw = ({cards, onAdd}: DrawProps) => {
     return (
-        <div>
-            <div className="col-12">
-                <CardColumns>
-                    <BackCard />
-                    <DrawSettings />
-                    {cards.map((card) =>
-                        <InputCard
-                            key={card.id}
-                            id={card.id}
-                            needed={card.needed}
-                            total={card.total}
-                        />)}
-                </CardColumns>
-                <Button
-                    className="draw"
-                    color="info"
-                    onClick={onAdd}
-                    block
-                >Add card
-                </Button>
-                <Calculate type={constants.CALCULATE_DRAW}/>
-            </div>
+        <div className="col-12">
+            <CardColumns>
+                <BackCard />
+                <DrawSettings />
+                {cards.map((card) =>
+                    <DrawCard
+                        key={card.id}
+                        id={card.id}
+                        needed={card.needed}
+                        total={card.total}
+                    />)}
+            </CardColumns>
+            <Button
+                className="draw"
+                color="info"
+                onClick={onAdd}
+                block
+            >Add card
+            </Button>
+            <Calculate type={constants.CALCULATE_DRAW}/>
         </div>
     );
 };

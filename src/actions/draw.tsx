@@ -5,10 +5,14 @@ let nextDrawId = -1;
 export interface AddDrawCard {
     id: number;
     type: constants.ADD_DRAW_CARD;
+    value?: number;
+    targetName?: string;
 }
 export interface RemoveDrawCard {
     id: number;
     type: constants.REMOVE_DRAW_CARD;
+    value?: number;
+    targetName?: string;
 }
 
 export interface UpdateCard {
@@ -25,7 +29,7 @@ export const addDrawCard = (): AddDrawCard => {
         type: constants.ADD_DRAW_CARD
     };
 };
-export type DrawCardAction = AddDrawCard | RemoveDrawCard | UpdateCard;
+export type DrawCardAction = UpdateCard | AddDrawCard | RemoveDrawCard;
 
 export const removeDrawCard = (id: number): RemoveDrawCard =>  {
     return {
