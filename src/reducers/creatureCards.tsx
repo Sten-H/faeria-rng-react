@@ -9,7 +9,8 @@ const god: CreatureCardState = {
     toDie: 0,
 };
 const defaultState: CreatureCardState[] = [
-    god
+    god,
+    {id: 1, isGod: false, hp: 2, toDie: 1}
 ];
 const updateCreatureCard = (cards: CreatureCardState[], action: InputAction) => {
     return cards.map((card) => {

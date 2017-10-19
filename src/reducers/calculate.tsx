@@ -3,20 +3,11 @@ import * as constants from '../constants/index';
 import { ResultState } from '../types/index';
 import { store } from '../index';
 import calculatePing from './probability_logic/ping-calculation';
+import calculateDraw from './probability_logic/draw-calculation';
 
-interface Result {
-    timeTaken: number;
-    desiredOutcomes: number;
-}
 const resultStateInitValue = {
     draw: {timeTaken: -1, desiredOutcomes: -1},
     ping: {timeTaken: -1, desiredOutcomes: -1}
-};
-const doSomethingDraw = ({timeTaken, desiredOutcomes}: Result) => {
-    return {
-        timeTaken: timeTaken + 10,
-        desiredOutcomes: desiredOutcomes + 10
-    };
 };
 /**
  * Returns a promise which resolves to an object with needed information
@@ -39,11 +30,11 @@ export function timeFunction (func: Function, ...args: Array<any>): Promise<{t: 
 export default function results(result: ResultState = resultStateInitValue, action: CalculateAction) {
     switch (action.type) {
         case constants.CALCULATE_DRAW:
-            // const newDraw = {...result.draw};
-            // const {creatureCards, settings}= store.getState();
+            const {drawCards, settings: {drawAmount}} = store.getState();
+            const p = calculateDraw(drawCards, drawAmount);
             return {
                 ...result,
-                draw: doSomethingDraw(result.draw)
+                draw: {timeTaken: 111, desiredOutcomes: Math.round(p * 1000)}
             };
         case constants.CALCULATE_PING: {
             const {creatureCards, settings: {pingAmount}} = store.getState();
@@ -51,7 +42,7 @@ export default function results(result: ResultState = resultStateInitValue, acti
             const p = calculatePing(creatureInfo, pingAmount);
             return {
                 ...result,
-                ping: {timeTaken: 999, desiredOutcomes: p}
+                ping: {timeTaken: 999, desiredOutcomes: Math.round(p * 1000)}
             };
         }
         default:

@@ -1,6 +1,7 @@
 import * as R from 'ramda';
-export type CreatureInfo = {toDie: boolean, hp: number, id: number};
+import * as helpers from './helpers';
 
+type CreatureInfo = {toDie: boolean, hp: number, id: number};
 type Creature = {id: number, hp: number};
 // Each entry in val array is 'id' of targeted creature
 type Outcome =  {val: Array<number>, p: number};
@@ -88,11 +89,11 @@ export const filterDesiredOutcomes = (creatureInputs: Array<CreatureInfo>, outco
         .reduce((acc, c) => acc.filter(outcome => isDesiredOutcome(c, outcome)), outcomes);
 };
 export const calculate = (creatureInput: Array<CreatureInfo>, pings: number): number => {
-    const creatures: Array<Creature> = creatureInput.map(c => ({id: c.id, hp: c.hp}));
+    const creatures = R.map(R.omit(['toDie']), creatureInput) as Array<Creature>;
     const outcomeTreeRootNode = createOutcomeTree(creatures, pings);
     const outcomes = getOutcomes(outcomeTreeRootNode);
     const filteredOutcomes = filterDesiredOutcomes(creatureInput, outcomes);
     const summedProbability = filteredOutcomes.reduce((acc, outcome) => acc + outcome.p, 0);
-    return summedProbability;
+    return helpers.roundToDecimal(summedProbability, 4);
 };
 export default calculate;

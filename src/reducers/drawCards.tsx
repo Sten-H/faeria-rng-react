@@ -2,6 +2,7 @@ import * as constants from '../constants/index';
 import { DrawCardState } from '../types/index';
 import { InputAction } from '../actions/commonActions';
 
+const defaultState = [{needed: 1, total: 3, id: 0}];
 const updateDrawCard = (cards: DrawCardState[], action: InputAction) => {
     return cards.map((card) => {
         if (card.id !== action.id) {
@@ -16,7 +17,7 @@ const updateDrawCard = (cards: DrawCardState[], action: InputAction) => {
         }
     });
 };
-export default function drawCards(state: DrawCardState[] = [], action: InputAction): DrawCardState[] {
+export default function drawCards(state: DrawCardState[] = defaultState, action: InputAction): DrawCardState[] {
     if (action.cardType !== constants.DRAW_CARD) {
         return state;
     }

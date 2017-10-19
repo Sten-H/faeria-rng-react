@@ -2,8 +2,8 @@ import { AddInputCard, RemoveInputCard, UpdateInputCard } from './commonActions'
 import * as constants from '../constants';
 import { SyntheticEvent } from 'react';
 
-// Creature cards begins with 1 card already (god card) so index is 0
-let nextCreatureId = 0;
+// creature cards default state already has 2 creature cards with id 0 and 1
+let nextCreatureId = 1;
 
 export const addCreatureCard = (): AddInputCard => {
     nextCreatureId += 1;

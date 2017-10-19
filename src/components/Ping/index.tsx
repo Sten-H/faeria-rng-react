@@ -3,7 +3,7 @@ import * as constants from '../../constants';
 import { Button, CardColumns } from 'reactstrap';
 import Calculate from '../../containers/Calculate';
 import PingSettings from '../../containers/PingSettings';
-import BackCard from '../common/BackCard/BackCard';
+import MenuCard from '../common/MenuCard/index';
 import { CreatureCardState } from '../../types/index';
 import CreatureCard from '../../containers/CreatureCard';
 
@@ -16,7 +16,7 @@ export const Ping = ({cards, onAdd}: PingProps) => {
     return (
         <div className="col-12">
             <CardColumns>
-                <BackCard />
+                <MenuCard />
                 <PingSettings />
                 {cards.map((card) =>
                     <CreatureCard

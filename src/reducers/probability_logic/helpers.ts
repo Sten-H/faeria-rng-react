@@ -1,14 +1,7 @@
-import * as R from "ramda";
+import * as R from 'ramda';
 
-export function range(start: number, end: number): ReadonlyArray<number> {
-    return R.range(start, end);
-}
-export function rangeInclusive(start: number, end: number): ReadonlyArray<number> {
-    return range(start, end + 1);
-}
-export function getRandomInt(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-export function getRandomIntInclusive(min: number, max: number): number {
-    return getRandomInt(min, max + 1);
-}
+export const roundToDecimal = (r: number, decimalPoint: number) => parseFloat(r.toFixed(decimalPoint));
+export const range = (start: number, end: number): ReadonlyArray<number> => R.range(start, end);
+export const rangeInclusive = (start: number, end: number): ReadonlyArray<number> => range(start, end + 1);
+export const getRandomInt = (min: number, max: number): number => Math.floor(Math.random() * (max - min)) + min;
+export const getRandomIntInclusive = (min: number, max: number): number => getRandomInt(min, max + 1);

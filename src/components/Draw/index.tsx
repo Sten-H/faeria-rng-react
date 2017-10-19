@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, CardColumns } from 'reactstrap';
 import * as constants from '../../constants';
 import { DrawCardState } from '../../types';
-import BackCard from '../common/BackCard/BackCard';
+import MenuCard from '../common/MenuCard/index';
 import DrawSettings from '../../containers/DrawSettings';
 import Calculate from '../../containers/Calculate';
 import DrawCard from '../../containers/DrawCard';
@@ -18,7 +18,7 @@ export const Draw = ({cards, onAdd}: DrawProps) => {
     return (
         <div className="col-12">
             <CardColumns>
-                <BackCard />
+                <MenuCard />
                 <DrawSettings />
                 {cards.map((card) =>
                     <DrawCard

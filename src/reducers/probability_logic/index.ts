@@ -1,3 +1,3 @@
 import calculatePing from './ping-calculation';
-
-export {calculatePing};
+import calculateDraw from './draw-calculation';
+export {calculatePing, calculateDraw};

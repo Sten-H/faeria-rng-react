@@ -2,7 +2,7 @@ import * as constants from '../constants';
 import { AddInputCard, RemoveInputCard, UpdateInputCard } from './commonActions';
 import { SyntheticEvent } from 'react';
 
-let nextDrawId = -1;
+let nextDrawId = 0;
 
 export const addDrawCard = (): AddInputCard => {
     nextDrawId += 1;
