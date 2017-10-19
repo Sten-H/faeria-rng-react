@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Button, CardColumns } from 'reactstrap';
 import * as constants from '../../constants';
 import { DrawCardState } from '../../types';
-import MenuCard from '../common/MenuCard/index';
-import DrawSettings from '../../containers/DrawSettings';
 import Calculate from '../../containers/Calculate';
 import DrawCard from '../../containers/DrawCard';
 
 import './Draw.css';
+import { InputArea } from '../common/InputArea/index';
 
 export interface DrawProps {
     cards: Array<DrawCardState>;
@@ -17,9 +15,7 @@ export interface DrawProps {
 export const Draw = ({cards, onAdd}: DrawProps) => {
     return (
         <div className="col-12">
-            <CardColumns>
-                <MenuCard />
-                <DrawSettings />
+            <InputArea context={'draw'} onAdd={onAdd}>
                 {cards.map((card) =>
                     <DrawCard
                         key={card.id}
@@ -27,14 +23,7 @@ export const Draw = ({cards, onAdd}: DrawProps) => {
                         needed={card.needed}
                         total={card.total}
                     />)}
-            </CardColumns>
-            <Button
-                className="add"
-                color="info"
-                onClick={onAdd}
-                block
-            >Add card
-            </Button>
+            </InputArea>
             <Calculate type={constants.CALCULATE_DRAW}/>
         </div>
     );

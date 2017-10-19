@@ -1,11 +1,9 @@
 import * as React from 'react';
 import * as constants from '../../constants';
-import { Button, CardColumns } from 'reactstrap';
 import Calculate from '../../containers/Calculate';
-import PingSettings from '../../containers/PingSettings';
-import MenuCard from '../common/MenuCard/index';
 import { CreatureCardState } from '../../types/index';
 import CreatureCard from '../../containers/CreatureCard';
+import { InputArea } from '../common/InputArea/index';
 
 interface PingProps {
     cards: Array<CreatureCardState>;
@@ -15,9 +13,7 @@ interface PingProps {
 export const Ping = ({cards, onAdd}: PingProps) => {
     return (
         <div className="col-12">
-            <CardColumns>
-                <MenuCard />
-                <PingSettings />
+            <InputArea context="creature" onAdd={onAdd}>
                 {cards.map((card) =>
                     <CreatureCard
                         key={card.id}
@@ -26,14 +22,7 @@ export const Ping = ({cards, onAdd}: PingProps) => {
                         toDie={card.toDie}
                         isGod={card.isGod}
                     />)}
-            </CardColumns>
-            <Button
-                className="add"
-                color="info"
-                onClick={onAdd}
-                block
-            >Add creature
-            </Button>
+            </InputArea>
             <Calculate type={constants.CALCULATE_PING}/>
         </div>
     );
