@@ -8,6 +8,9 @@
 
 .card.back a:hover {
     color: #0275D8;
+    font-size: 1.05em;
+    text-shadow: 1px 0px 20px white;
+    transition: 200ms ease-in;
 }
 .card.back a span {
     top: 0.20em;

@@ -1,6 +1,6 @@
 import * as constants from '../constants';
-import { SyntheticEvent } from 'react';
 import { AddInputCard, RemoveInputCard, UpdateInputCard } from './commonActions';
+import { SyntheticEvent } from 'react';
 
 let nextDrawId = -1;
 
@@ -21,7 +21,7 @@ export const removeDrawCard = (id: number): RemoveInputCard =>  {
     };
 };
 
-export const updateCard = (id: number, evt: SyntheticEvent<HTMLInputElement>): UpdateInputCard => {
+export const updateDrawCard = (id: number, evt: SyntheticEvent<HTMLInputElement>): UpdateInputCard => {
     return {
         id: id,
         value: parseInt(evt.currentTarget.value, 10),

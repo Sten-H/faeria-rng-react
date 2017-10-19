@@ -4,7 +4,7 @@ import { SyntheticEvent } from 'react';
 import { InputCard } from '../../common/InputCard';
 import TiTrash from 'react-icons/lib/ti/trash';
 
-export interface DrawCardProps {
+interface DrawCardProps {
     id: number;
     needed: number;
     total: number;

@@ -5,3 +5,10 @@
 .card.settings {
     background-color: #5CB85C;
 }
+.card input {
+    text-align: center;
+}
+
+.card.creature.toDie {
+    background-color: #0275D8;
+}

@@ -6,7 +6,8 @@ export interface DrawCardState {
 export interface CreatureCardState {
     id: number;
     hp: number;
-    toDie: boolean;
+    toDie: number;
+    isGod: boolean;
 }
 export interface SettingsState {
     drawAmount: number;
