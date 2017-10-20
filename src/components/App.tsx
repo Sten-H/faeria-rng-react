@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router';
 import { Home } from './Home/index';
-import { Page, Header, Footer } from './common/SiteTemplates';
+import { Page, Header, Footer } from './SiteTemplates';
 import Draw from '../containers/Draw';
 import Ping from '../containers/Ping';
 

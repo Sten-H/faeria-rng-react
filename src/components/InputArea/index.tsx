@@ -2,9 +2,9 @@ import * as React from 'react';
 import { CardColumns } from 'reactstrap/';
 import MenuCard  from '../MenuCard';
 import { Button } from 'reactstrap';
-import DrawSettings from '../../../containers/DrawSettings';
-import PingSettings from '../../../containers/PingSettings';
-import * as constants from '../../../constants';
+import DrawSettings from '../../containers/DrawSettings';
+import PingSettings from '../../containers/PingSettings';
+import * as constants from '../../constants';
 
 interface InputArea {
     context: string;
@@ -17,7 +17,7 @@ const getContextComponents = (context: string) => {
         buttonText: (isDraw) ? 'Add card' : 'Add creature',
         settings: (isDraw) ? <DrawSettings /> : <PingSettings />,
         calcType: (isDraw) ? constants.CALCULATE_DRAW : constants.CALCULATE_PING
-    }
+    };
 };
 export const InputArea = ({onAdd, context, children}: InputArea) => {
     const {buttonText, settings} = getContextComponents(context);

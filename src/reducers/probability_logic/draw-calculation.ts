@@ -1,4 +1,5 @@
 import * as helpers from './helpers';
+import * as R from 'ramda';
 /**
  * Calculation namespace calculates probability to draw desired cards using combinatorics. Its disadvantage is that
  * it does not account for starting hand mulligans but is much faster that simulation.
@@ -23,20 +24,30 @@ function choose(n: number, k: number): number {
         return (n * choose(n - 1, k - 1)) / k;
     }
 }
+// Card -> a: number
+const combinationProduct = R.compose(
+    R.product,
+    R.map((c: Card) => choose(c.total, c.drawn)));
 
-/**
- * Returns the number of combinations the cards can make. FIXME explain better.
- * @param combinations
- * @returns {*}
- */
-export function combinationCount(combinations: Array<Combination>): number {
-    return combinations.reduce((sum, combo) => {
-        const comboProduct: number = combo
-            .reduce((product, card) => product * choose(card.total, card.drawn), 1);
-        return comboProduct + sum;
-        }, 0);
-}
+// Combination -> a: number, sums the product of all combinations
+export const allCombinationCount = R.reduce((sum, combo: Combination) => sum + combinationProduct(combo), 0);
 
+// Looks at one combination to see all cards total amount and sums it to find out non target cards in deck
+// Array<Combination> _> a: number
+const nonTargetCardsInDeck = R.compose(
+    R.subtract(DECK_SIZE),
+    R.reduce((sum, card: Card) => sum + card.total, 0),
+    R.flatten,
+    R.take(1));
+
+// Combination -> a: number
+const combinationTargetDraws = R.reduce((sum, card: Card) => sum + card.drawn, 0);
+// Combination -> a: number
+const combinationNonTargetDraws = (combo: Combination, draws: number) =>
+    R.subtract(draws, combinationTargetDraws(combo));
+// Combination -> Combination, fills single combination of target cards with remaining draws from non target
+const fillCombination = R.curry((nonTargetAmount: number, draws: number, combo: Combination) =>
+    R.append({total: nonTargetAmount, drawn: combinationNonTargetDraws(combo, draws)}, combo));
 /**
  * Fills a combinations of target cards with remaining draws from non target cards and returns that updated
  * array of combinations.
@@ -44,15 +55,11 @@ export function combinationCount(combinations: Array<Combination>): number {
  * @param draws
  * @returns {Array}
  */
-export const fillCombinations = (targetCombinations: Array<Combination>, draws: number): Array<Combination> => {
-    const nonTargetAmount: number = DECK_SIZE - targetCombinations[0]
-        .reduce((acc, card) => acc + card.total, 0);
-    // Add the remaining draws (after combination has been drawn) from non target cards
-    return targetCombinations.map((combo) => {
-        const drawn: number = combo.reduce((drawAcc, card) => drawAcc + card.drawn, 0),
-            drawsLeft: number = Math.max(draws - drawn, 0);
-        return combo.concat({total: nonTargetAmount, drawn: drawsLeft});
-    });
+export const fillAllCombinations = (targetCombinations: Array<Combination>, draws: number): Array<Combination> => {
+    const nonTargetAmount = nonTargetCardsInDeck(targetCombinations);
+    const fillComboFunc = fillCombination(nonTargetAmount, draws);
+    // Fill each combo with remaining draws from non target cards
+    return targetCombinations.map((combo) => fillComboFunc(combo));
 };
 
 /**
@@ -66,7 +73,8 @@ export const fillCombinations = (targetCombinations: Array<Combination>, draws: 
  * @returns {Array<Combination>}
  */
 // FIXME remove any type
-export const targetCombinations = (targetCards: Array<CardInfo>, activeCombo: Combination = []): any => {
+export const targetCombinations = (targetCards: Array<CardInfo>,
+                                   activeCombo: Combination = []): any => {
     if (targetCards.length === 0) {
         return [activeCombo];  // Not entirely sure why I need to wrap this
     }
@@ -84,9 +92,8 @@ export const targetCombinations = (targetCards: Array<CardInfo>, activeCombo: Co
 export function calculate(cards: Array<CardInfo>, draws: number): number {
 
     const validTargetCombinations = targetCombinations(cards);
-    const allValidCombinations = fillCombinations(validTargetCombinations, draws);
-    const result = combinationCount(allValidCombinations) / choose(DECK_SIZE, draws);
-    console.log(helpers.roundToDecimal(result, 4));
+    const allValidCombinations = fillAllCombinations(validTargetCombinations, draws);
+    const result = allCombinationCount(allValidCombinations) / choose(DECK_SIZE, draws);
     return helpers.roundToDecimal(result, 4);
 }
 export default calculate;

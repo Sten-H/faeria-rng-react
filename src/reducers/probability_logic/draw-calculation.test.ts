@@ -1,4 +1,4 @@
-import { calculate, combinationCount, fillCombinations, targetCombinations } from './draw-calculation';
+import { calculate, allCombinationCount, fillAllCombinations, targetCombinations } from './draw-calculation';
 
 describe('Draw calculation', () => {
     describe('Card combinations', () => {
@@ -22,7 +22,7 @@ describe('Draw calculation', () => {
             const cards = [{needed: 1, total: 2}];
             const combinations = targetCombinations(cards);
             const draws = 10;
-            const filledCombinations = fillCombinations(combinations, draws);
+            const filledCombinations = fillAllCombinations(combinations, draws);
             const expectedCombinations = [
                 [{drawn: 2, total: 2}, {drawn: 8, total: 28}],
                 [{drawn: 1, total: 2}, {drawn: 9, total: 28}]
@@ -36,17 +36,17 @@ describe('Draw calculation', () => {
             const expected = 7;
             const expectedAll = 29156985;
             const combinations = targetCombinations([{needed: 1, total: 3}]);
-            const allCombinations = fillCombinations(combinations, draws);
-            expect(combinationCount(combinations)).toEqual(expected);
-            expect(combinationCount(allCombinations)).toEqual(expectedAll);
+            const allCombinations = fillAllCombinations(combinations, draws);
+            expect(allCombinationCount(combinations)).toEqual(expected);
+            expect(allCombinationCount(allCombinations)).toEqual(expectedAll);
         });
         it('Count complex combinations', () => {
             // Regression tests
             const draws = 20;
             const expected = 19271472;
             const cards = [{needed: 1, total: 3}, {needed: 1, total: 2}, {needed: 2, total: 3}];
-            const combinations = fillCombinations(targetCombinations(cards), draws);
-            expect(combinationCount(combinations)).toEqual(expected);
+            const combinations = fillAllCombinations(targetCombinations(cards), draws);
+            expect(allCombinationCount(combinations)).toEqual(expected);
         });
     });
     describe('Probability', () => {

@@ -84,7 +84,8 @@ export const isDesiredOutcome = (creature: CreatureInfo, outcome: Outcome): bool
  * @param outcomes {Array<Outcome>} array of outcomes
  * @returns {Array<Outcome>}
  */
-export const filterDesiredOutcomes = (creatureInputs: Array<CreatureInfo>, outcomes: Array<Outcome>): Array<Outcome> => {
+export const filterDesiredOutcomes = (creatureInputs: Array<CreatureInfo>,
+                                      outcomes: Array<Outcome>): Array<Outcome> => {
     return creatureInputs
         .reduce((acc, c) => acc.filter(outcome => isDesiredOutcome(c, outcome)), outcomes);
 };

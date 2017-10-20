@@ -15,10 +15,10 @@ const resultStateInitValue = {
  * @param  {Array} args  func arguments
  * @return {Promise}     Returns a promise that resolves to an object with t and results values
  */
-export function timeFunction (func: Function, ...args: Array<any>): Promise<{t: number, results: any}> {
+export function timeFunction (func: Function, ...args: Array<{}>): Promise<{t: number, results: {}}> {
     return new Promise((resolve, reject) => {
         const t0: number = performance.now(),
-            returnValue: any = func(...args),
+            returnValue: {} = func(...args),
             deltaTime: number = performance.now() - t0;
         resolve({t: deltaTime, results: returnValue});
     });
@@ -31,18 +31,18 @@ export default function results(result: ResultState = resultStateInitValue, acti
     switch (action.type) {
         case constants.CALCULATE_DRAW:
             const {drawCards, settings: {drawAmount}} = store.getState();
-            const p = calculateDraw(drawCards, drawAmount);
+            const drawProbability = calculateDraw(drawCards, drawAmount);
             return {
                 ...result,
-                draw: {timeTaken: 111, desiredOutcomes: Math.round(p * 1000)}
+                draw: {timeTaken: 111, desiredOutcomes: Math.round(drawProbability * 1000)}
             };
         case constants.CALCULATE_PING: {
             const {creatureCards, settings: {pingAmount}} = store.getState();
             const creatureInfo = creatureCards.map((c) => ({id: c.id, hp: c.hp, toDie: Boolean(c.toDie)}));
-            const p = calculatePing(creatureInfo, pingAmount);
+            const pingProbability = calculatePing(creatureInfo, pingAmount);
             return {
                 ...result,
-                ping: {timeTaken: 999, desiredOutcomes: Math.round(p * 1000)}
+                ping: {timeTaken: 999, desiredOutcomes: Math.round(pingProbability * 1000)}
             };
         }
         default:

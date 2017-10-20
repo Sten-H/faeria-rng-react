@@ -1,8 +1,8 @@
-import * as React from 'react';
-import * as enzyme from 'enzyme';
-import InputArea from './';
+// import * as React from 'react';
+// import * as enzyme from 'enzyme';
+// import InputArea from './';
 
-it('Test input cards renders', () => {
+it('Renders with children', () => {
    expect(true).toBe(false);
 });
 it('Test add input card button', () => {
