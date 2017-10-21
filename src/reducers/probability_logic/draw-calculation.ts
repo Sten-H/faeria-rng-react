@@ -30,10 +30,10 @@ const combinationProduct = R.compose(
     R.map((c: Card) => choose(c.total, c.drawn)));
 
 // Combination -> a: number, sums the product of all combinations
-export const allCombinationCount = R.reduce((sum, combo: Combination) => sum + combinationProduct(combo), 0);
+export const combinationCount = R.reduce((sum, combo: Combination) =>
+    sum + combinationProduct(combo), 0);
 
-// Looks at one combination to see all cards total amount and sums it to find out non target cards in deck
-// Array<Combination> _> a: number
+// Combination[] -> a: number
 const nonTargetCardsInDeck = R.compose(
     R.subtract(DECK_SIZE),
     R.reduce((sum, card: Card) => sum + card.total, 0),
@@ -48,52 +48,78 @@ const combinationNonTargetDraws = (combo: Combination, draws: number) =>
 // Combination -> Combination, fills single combination of target cards with remaining draws from non target
 const fillCombination = R.curry((nonTargetAmount: number, draws: number, combo: Combination) =>
     R.append({total: nonTargetAmount, drawn: combinationNonTargetDraws(combo, draws)}, combo));
-/**
- * Fills a combinations of target cards with remaining draws from non target cards and returns that updated
- * array of combinations.
- * @param targetCombinations
- * @param draws
- * @returns {Array}
- */
-export const fillAllCombinations = (targetCombinations: Array<Combination>, draws: number): Array<Combination> => {
+
+// Returns a new combination with remaining draws from non target cards
+export const fillAllCombinations = R.curry((draws: number, targetCombinations: Array<Combination>): Array<Combination> => {
     const nonTargetAmount = nonTargetCardsInDeck(targetCombinations);
     const fillComboFunc = fillCombination(nonTargetAmount, draws);
     // Fill each combo with remaining draws from non target cards
-    return targetCombinations.map((combo) => fillComboFunc(combo));
+    return R.map(fillComboFunc, targetCombinations);
+});
+
+// c -> [n], returns a range of valid draw amounts
+const validDrawAmounts = ({needed, total}: CardInfo) => R.range(needed, R.inc(total));
+const createCard = R.curry((total, drawn) => ({total, drawn} as Card));
+export const cardValidDraws = (cardInfo: CardInfo) =>
+    R.map(createCard(cardInfo.total), validDrawAmounts(cardInfo));
+export const allValidDraws = R.map(cardValidDraws);
+
+// ([c], c) -> [c]
+const comboCrossProduct = (combo: Combination, c: Card[]) => {
+    if(R.isEmpty(combo)) {
+        return c;
+    }
+    return R.xprod(combo, c);
+};
+// [a] -> string
+const allTypes = R.compose(
+    R.join(' '),
+    R.map(R.type));
+
+// [a] -> boolean
+const isFlat = R.compose(
+    R.not,
+    R.contains("Array"),
+    allTypes);
+
+// [a] -> [b]
+export const deepUnnest = R.compose(
+    R.until(isFlat,
+        R.unnest));
+
+// a -> [a]
+const wrapObject = R.ifElse(
+    R.has('length'),
+    R.identity,
+    Array);
+
+// CardInfo[] -> Combination[], gets all possible combinations of valid draws from each target card
+export const targetCardCombinations = (cards: CardInfo[]): Combination[] => {
+    return R.compose(
+        R.map(deepUnnest),
+        R.map(wrapObject),
+        R.reduce(comboCrossProduct, []),
+        allValidDraws
+    )(cards) as Combination[];
 };
 
+// n -> n
+const allCombinationCount = (draws: number) => choose(DECK_SIZE, draws);
+
+// n -> n-> n, validCombinations / possibleCombinations
+const calculateProbability = (draws: number) => R.flip(R.divide)(allCombinationCount(draws));
 /**
- * Creates all valid combination of target card draws. Draws only from target cards, the deck is not considered.
- * Every valid card draw is represented as an array with two values [total, drawn], for a targetCard {needed: 2, amount: 3}
- * two array will be created since there are tvo valid combinations of that card (drawn = 2 and drawn = 3),
- * each separate combination of a card will then be combined with all other cards valid combinations to create
- * all valid combinations of target card draws.
- * @param targetCards {CardInfo}
- * @param activeCombo {Combination}
- * @returns {Array<Combination>}
- */
-// FIXME remove any type
-export const targetCombinations = (targetCards: Array<CardInfo>,
-                                   activeCombo: Combination = []): any => {
-    if (targetCards.length === 0) {
-        return [activeCombo];  // Not entirely sure why I need to wrap this
-    }
-    const [card, ...cardsLeft] = targetCards;
-    return helpers.rangeInclusive(card.needed, card.total).reduce((results, currentNeeded) => {
-        return results.concat(targetCombinations(cardsLeft, activeCombo.concat({total: card.total, drawn: currentNeeded})));
-    }, []);
-};
-/**
- *
+ * Divides all possible combinations of cards with all desired combinations to get probability
  * @param cards {Array<CardInfo>}     Array containing Objects with information about target cards (amount, needed)
  * @param draws {number}    Amount of draws
- * @returns {number}        Probability to draw hand rounded to 3 decimal points
+ * @returns {number}        Probability to draw hand rounded to 4 decimal points
  */
-export function calculate(cards: Array<CardInfo>, draws: number): number {
-
-    const validTargetCombinations = targetCombinations(cards);
-    const allValidCombinations = fillAllCombinations(validTargetCombinations, draws);
-    const result = allCombinationCount(allValidCombinations) / choose(DECK_SIZE, draws);
-    return helpers.roundToDecimal(result, 4);
-}
+export const calculate = (cards: Array<CardInfo>, draws: number): number =>
+    R.compose(
+        helpers.roundToDecimal(4),
+        calculateProbability(draws),
+        combinationCount,
+        fillAllCombinations(draws),
+        targetCardCombinations
+    )(cards);
 export default calculate;

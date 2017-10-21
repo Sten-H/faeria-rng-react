@@ -95,6 +95,6 @@ export const calculate = (creatureInput: Array<CreatureInfo>, pings: number): nu
     const outcomes = getOutcomes(outcomeTreeRootNode);
     const filteredOutcomes = filterDesiredOutcomes(creatureInput, outcomes);
     const summedProbability = filteredOutcomes.reduce((acc, outcome) => acc + outcome.p, 0);
-    return helpers.roundToDecimal(summedProbability, 4);
+    return helpers.roundToDecimal(4, summedProbability);
 };
 export default calculate;
