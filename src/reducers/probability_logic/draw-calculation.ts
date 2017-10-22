@@ -8,6 +8,7 @@ export const DECK_SIZE = 30;
 export type CardInfo = { needed: number, total: number};
 type Card = { drawn: number, total: number};
 type Combination = Array<Card>;
+
 /**
  * Recursive implementation of n choose k.
  * @param  {int} n Total amount to choose from
@@ -30,8 +31,9 @@ const combinationProduct = R.compose(
     R.map((c: Card) => choose(c.total, c.drawn)));
 
 // Combination -> a: number, sums the product of all combinations
-export const combinationCount = R.reduce((sum, combo: Combination) =>
-    sum + combinationProduct(combo), 0);
+export const combinationCount = R.reduce(
+    (sum, combo: Combination) => sum + combinationProduct(combo),
+    0);
 
 // Combination[] -> a: number
 const nonTargetCardsInDeck = R.compose(
@@ -42,15 +44,18 @@ const nonTargetCardsInDeck = R.compose(
 
 // Combination -> a: number
 const combinationTargetDraws = R.reduce((sum, card: Card) => sum + card.drawn, 0);
+
 // Combination -> a: number
 const combinationNonTargetDraws = (combo: Combination, draws: number) =>
     R.subtract(draws, combinationTargetDraws(combo));
-// Combination -> Combination, fills single combination of target cards with remaining draws from non target
+
+// n -> n -> Combination -> Combination, fills single combination of target cards with remaining draws from non target
 const fillCombination = R.curry((nonTargetAmount: number, draws: number, combo: Combination) =>
     R.append({total: nonTargetAmount, drawn: combinationNonTargetDraws(combo, draws)}, combo));
 
 // Returns a new combination with remaining draws from non target cards
-export const fillAllCombinations = R.curry((draws: number, targetCombinations: Array<Combination>): Array<Combination> => {
+export const fillAllCombinations =
+    R.curry((draws: number, targetCombinations: Array<Combination>): Array<Combination> => {
     const nonTargetAmount = nonTargetCardsInDeck(targetCombinations);
     const fillComboFunc = fillCombination(nonTargetAmount, draws);
     // Fill each combo with remaining draws from non target cards
@@ -66,7 +71,7 @@ export const allValidDraws = R.map(cardValidDraws);
 
 // ([c], c) -> [c]
 const comboCrossProduct = (combo: Combination, c: Card[]) => {
-    if(R.isEmpty(combo)) {
+    if (R.isEmpty(combo)) {
         return c;
     }
     return R.xprod(combo, c);
@@ -79,12 +84,13 @@ const allTypes = R.compose(
 // [a] -> boolean
 const isFlat = R.compose(
     R.not,
-    R.contains("Array"),
+    R.contains('Array'),
     allTypes);
 
 // [a] -> [b]
 export const deepUnnest = R.compose(
-    R.until(isFlat,
+    R.until(
+        isFlat,
         R.unnest));
 
 // a -> [a]

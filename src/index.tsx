@@ -11,12 +11,6 @@ import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
-// const store = createStore<StoreState>(reducers, {
-//     // creatureCards: [
-//     // ],
-//     creatureCards: [
-//     ],
-// });
 export const store = createStore<StoreState>(reducers);
 ReactDOM.render(
     <Provider store={store}>

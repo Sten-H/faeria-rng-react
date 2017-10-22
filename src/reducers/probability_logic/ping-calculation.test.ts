@@ -1,10 +1,10 @@
 import { calculate, pingCreature, createOutcomeTree, getOutcomes,
-    isDesiredOutcome, filterDesiredOutcomes } from './ping-calculation';
+    isDesiredOutcome, desiredOutcomes } from './ping-calculation';
 import * as R from 'ramda';
 describe('Ping probability calculation', () => {
     describe('Ping', () => {
         it('Decrements hp', () => {
-            const creature = {hp: 2, id: 0};
+            const creature = {hp: 2, id: 0, toDie: false};
             expect(pingCreature(creature).hp).toEqual(1);
         });
     });
@@ -44,18 +44,25 @@ describe('Ping probability calculation', () => {
     });
     describe('Outcomes', () => {
         const cInfo1 = {hp: 1, id:0, toDie: true};
-        const outcome1 = getOutcomes(createOutcomeTree([{hp: cInfo1.hp, id: cInfo1.id}], 1));
+        const outcome1 = [{val: [0], p: 0}];
         const cInfo2 = R.assoc('toDie', false, cInfo1);
-        const outcome2 = getOutcomes(createOutcomeTree([{hp: cInfo2.hp, id: cInfo2.id}], 1));
+        const outcome2 = [{val: [0], p: 0}];
         it('desirability is determined correctly', () => {
             // Want creature to die and it does
-            expect(isDesiredOutcome(cInfo1, outcome1[0])).toBe(true);
+            expect(isDesiredOutcome(outcome1[0], cInfo1)).toBe(true);
             // Want creature to live but it dies
-            expect(isDesiredOutcome(cInfo2, outcome2[0])).toBe(false);
+            expect(isDesiredOutcome(outcome2[0], cInfo2)).toBe(false);
+            // Creature with multiple hp points to die from inconsecutive pings
+            const cInfo3 = {hp: 3, id:0, toDie: true};
+            const outcome3 = {val: [0, 0, 1, 0], p: 0};
+            expect(isDesiredOutcome(outcome3, cInfo3)).toBe(true);
+            // Same creature with non killing damage
+            const outcome4 = {val: [0, 1, 1, 0], p: 0};
+            expect(isDesiredOutcome(outcome4, cInfo3)).toBe(false);
         });
         it('are filtered correctly according to desired status of creatures', () => {
-           expect(filterDesiredOutcomes([cInfo1], outcome1)).toHaveLength(1);
-            expect(filterDesiredOutcomes([cInfo2], outcome2)).toHaveLength(0);
+           expect(desiredOutcomes([cInfo1], outcome1)).toHaveLength(1);
+           expect(desiredOutcomes([cInfo2], outcome2)).toHaveLength(0);
         });
     });
     describe('Calculate', () => {

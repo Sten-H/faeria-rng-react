@@ -4,6 +4,7 @@ import { ResultState } from '../types/index';
 import { store } from '../index';
 import calculatePing from './probability_logic/ping-calculation';
 import calculateDraw from './probability_logic/draw-calculation';
+import * as helpers from './probability_logic/helpers';
 
 const resultStateInitValue = {
     draw: {timeTaken: -1, desiredOutcomes: -1},
@@ -34,7 +35,7 @@ export default function results(result: ResultState = resultStateInitValue, acti
             const drawProbability = calculateDraw(drawCards, drawAmount);
             return {
                 ...result,
-                draw: {timeTaken: 111, desiredOutcomes: Math.round(drawProbability * 1000)}
+                draw: {timeTaken: 111, desiredOutcomes: helpers.roundToDecimal(1, drawProbability * 1000)}
             };
         case constants.CALCULATE_PING: {
             const {creatureCards, settings: {pingAmount}} = store.getState();
@@ -42,7 +43,7 @@ export default function results(result: ResultState = resultStateInitValue, acti
             const pingProbability = calculatePing(creatureInfo, pingAmount);
             return {
                 ...result,
-                ping: {timeTaken: 999, desiredOutcomes: Math.round(pingProbability * 1000)}
+                ping: {timeTaken: 999, desiredOutcomes: helpers.roundToDecimal(1, pingProbability * 1000)}
             };
         }
         default:

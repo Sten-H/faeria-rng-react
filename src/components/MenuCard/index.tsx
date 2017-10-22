@@ -1,6 +1,5 @@
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import TiLeft from 'react-icons/lib/ti/chevron-left-outline';
 import * as React from 'react';
 import './MenuCard.css';
 
@@ -9,11 +8,10 @@ export const MenuCard = () => (
         <CardBody className="pb-0 pt-2">
             <CardTitle>
                 <Link to="/">
-                    <TiLeft className="float-left" />Menu
+                    Menu{/* FIXME Chevron-left react-icon bugs tests if entered here*/}
                 </Link>
             </CardTitle>
         </CardBody>
     </Card>
 );
-
 export default MenuCard;

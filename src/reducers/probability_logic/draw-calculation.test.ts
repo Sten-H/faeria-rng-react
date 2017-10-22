@@ -84,7 +84,10 @@ describe('Draw calculation', () => {
             const drawAmount = 20;
             const cards = [{needed: 1, total: 3}];
             const result = calculate(cards, drawAmount);
+            const expectedResult2 = 0.0002;
+            const result2 = calculate([{needed: 3, total: 3}], 3);
             expect(result).toEqual(expectedResult);
+            expect(result2).toEqual(expectedResult2);
         })
     });
 });

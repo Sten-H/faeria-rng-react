@@ -23,8 +23,11 @@ export const Home = () => (
                 <CardTitle>Ping Probability</CardTitle>
                 <hr />
                 <CardText>{pingText}</CardText>
-                <Link to="/ping" className="btn btn-danger">Get Angry</Link>
+                <Link to="/ping" className="btn btn-danger">
+                    Get Angry
+                </Link>
             </CardBody>
         </Card>
     </div>
 );
+export default Home;
