@@ -32,7 +32,7 @@ const Main = () => (
         </MainContainer>
 );
 
-const App = () => (
+export const App = () => (
     <Page>
         <Main />
     </Page>

@@ -1,5 +1,5 @@
 import * as constants from '../constants';
-import { SyntheticEvent } from 'react';
+import { EventProps } from './commonActions';
 
 export interface UpdateNumericSetting {
     value: number;
@@ -14,7 +14,7 @@ export interface UpdateMulligan {
 }
 export type SettingsAction = UpdateNumericSetting | UpdateMulligan;
 
-export const updateAmount = (evt: SyntheticEvent<HTMLInputElement>): SettingsAction => {
+export const updateAmount = (evt: EventProps): SettingsAction => {
     return {
         value: parseInt(evt.currentTarget.value, 10),
         targetName: evt.currentTarget.name,
@@ -22,9 +22,9 @@ export const updateAmount = (evt: SyntheticEvent<HTMLInputElement>): SettingsAct
     };
 };
 
-export const updateMulligan = (evt: SyntheticEvent<HTMLInputElement>): SettingsAction => {
+export const updateMulligan = (evt: EventProps): SettingsAction => {
     return {
-        value: evt.currentTarget.checked,
+        value: evt.currentTarget.checked!,
         targetName: evt.currentTarget.name,
         type: constants.UPDATE_DRAW_MULLIGAN
     };

@@ -1,9 +1,9 @@
 import * as constants from '../constants';
-import { AddInputCard, RemoveInputCard, UpdateInputCard } from './commonActions';
-import { SyntheticEvent } from 'react';
+import { AddInputCard, EventProps, RemoveInputCard, UpdateInputCard } from './commonActions';
 
 let nextDrawId = 0;
 
+export const resetDrawId = () => nextDrawId = 0;  // Only used for testing, feel like I'm doing something weird here.
 export const addDrawCard = (): AddInputCard => {
     nextDrawId += 1;
     return {
@@ -21,7 +21,7 @@ export const removeDrawCard = (id: number): RemoveInputCard =>  {
     };
 };
 
-export const updateDrawCard = (id: number, evt: SyntheticEvent<HTMLInputElement>): UpdateInputCard => {
+export const updateDrawCard = (id: number, evt: EventProps): UpdateInputCard => {
     return {
         id: id,
         value: parseInt(evt.currentTarget.value, 10),

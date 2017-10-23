@@ -1,10 +1,9 @@
-import { AddInputCard, RemoveInputCard, UpdateInputCard } from './commonActions';
+import { AddInputCard, EventProps, RemoveInputCard, UpdateInputCard } from './commonActions';
 import * as constants from '../constants';
-import { SyntheticEvent } from 'react';
 
 // creature cards default state already has 2 creature cards with id 0 and 1
 let nextCreatureId = 1;
-
+export const resetCreatureId = () => nextCreatureId = 1;
 export const addCreatureCard = (): AddInputCard => {
     nextCreatureId += 1;
     return {
@@ -22,7 +21,7 @@ export const removeCreatureCard = (id: number): RemoveInputCard =>  {
     };
 };
 //
-export const updateCreatureCard = (id: number, evt: SyntheticEvent<HTMLInputElement>): UpdateInputCard => {
+export const updateCreatureCard = (id: number, evt: EventProps): UpdateInputCard => {
     return {
         id: id,
         value: parseInt(evt.currentTarget.value, 10),

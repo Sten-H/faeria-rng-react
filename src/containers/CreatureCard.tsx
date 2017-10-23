@@ -27,11 +27,12 @@ const getCardClassNames = (toDie: number, isGod: boolean) => {
 };
 
 export const CreatureCard = ({isGod, id, hp, toDie, onRemove, onChange}: CreatureCardProps) => {
+    const removeFunc = (isGod) ? null : () => onRemove(id);
     return (
         <InputCard
             className={getCardClassNames(toDie, isGod)}
             title={(isGod) ? 'God' : 'Creature'}
-            onRemove={() => onRemove(id)}
+            onRemove={removeFunc!}
         >
             <Form>
                 <FormGroup row>
