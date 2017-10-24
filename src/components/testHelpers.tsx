@@ -1,14 +1,14 @@
 import * as React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { MemoryRouter } from 'react-router-dom';
+import { LocationDescriptor } from 'history';
 
-export const withRouter = (component: any) => {
+export const withRouter = (component: any, initalEntries?: LocationDescriptor[]) => {
     return (
-        <Router history={createBrowserHistory()}>
+        <MemoryRouter initialEntries={initalEntries}>
             {component}
-        </Router>);
+        </MemoryRouter>);
 };
 export const withStore = (component: any, state: {}) => {
     const mockStore = configureMockStore();

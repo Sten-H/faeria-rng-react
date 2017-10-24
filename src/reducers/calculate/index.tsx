@@ -1,7 +1,6 @@
-import { CalculateAction } from '../actions/calculate';
-import * as constants from '../constants/index';
-import { ResultState } from '../types/index';
-import { store } from '../index';
+import { CalculateAction } from '../../actions/calculate';
+import * as constants from '../../constants/index';
+import { ResultState } from '../../types/index';
 import calculatePing from './probability_logic/ping-calculation';
 import calculateDraw from './probability_logic/draw-calculation';
 import * as helpers from './probability_logic/helpers';
@@ -28,17 +27,17 @@ export function timeFunction (func: Function, ...args: Array<{}>): Promise<{t: n
  * I might need to pass this reducer the entire state so it can clamp numbers such as ping and draw amount.
  * Not just clamp them for calculation but so user can see that they were clamped before calculation.
  */
-export default function results(result: ResultState = resultStateInitValue, action: CalculateAction) {
+export default function results (result: ResultState = resultStateInitValue, action: CalculateAction) {
     switch (action.type) {
         case constants.CALCULATE_DRAW:
-            const {drawCards, settings: {drawAmount}} = store.getState();
+            const {drawCards, drawAmount} = action;
             const drawProbability = calculateDraw(drawCards, drawAmount);
             return {
                 ...result,
                 draw: {timeTaken: 111, desiredOutcomes: helpers.roundToDecimal(1, drawProbability * 1000)}
             };
         case constants.CALCULATE_PING: {
-            const {creatureCards, settings: {pingAmount}} = store.getState();
+            const {creatureCards, pingAmount} = action;
             const creatureInfo = creatureCards.map((c) => ({id: c.id, hp: c.hp, toDie: Boolean(c.toDie)}));
             const pingProbability = calculatePing(creatureInfo, pingAmount);
             return {

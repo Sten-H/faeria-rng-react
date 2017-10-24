@@ -4,6 +4,7 @@ import * as actions from '../actions/calculate';
 import * as constants from '../constants';
 import { connect, Dispatch } from 'react-redux';
 import { StoreState } from '../types/index';
+import { store } from '../index';
 
 /**
  * The calculate button will dispatch either calculateDraw or calculatePing depending on which
@@ -56,7 +57,9 @@ const mapStateToProps = ({results: {draw, ping}}: StoreState, {type}: OwnProps) 
 export function mapDispatchToProps(dispatch: Dispatch<actions.CalculateAction>, {type}: OwnProps) {
     const relevantFunc = (type === constants.CALCULATE_DRAW) ? actions.calculateDraw : actions.calculatePing;
     return {
-        onCalculate: () => dispatch(relevantFunc()),
+        // I use getState in dispatch here instead of in action or reducer because it becomes easier to mock
+        // state for tests for those functions. I'm not really sure if this is good choice, feels icky.
+        onCalculate: () => dispatch(relevantFunc(store.getState())),
     };
 }
 

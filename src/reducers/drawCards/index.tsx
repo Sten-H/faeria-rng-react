@@ -1,6 +1,6 @@
-import * as constants from '../constants/index';
-import { DrawCardState } from '../types/index';
-import { InputAction } from '../actions/commonActions';
+import * as constants from '../../constants/index';
+import { DrawCardState } from '../../types/index';
+import { InputAction } from '../../actions/commonActions';
 
 const defaultState = [{needed: 1, total: 3, id: 0}];
 const updateDrawCard = (cards: DrawCardState[], action: InputAction) => {

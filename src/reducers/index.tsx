@@ -1,10 +1,10 @@
-import drawCards from './drawCards';
-import settings from './settings';
-import results from './calculate';
-import creatureCards from './creatureCards';
+import drawCards from './drawCards/index';
+import settings from './settings/index';
+import results from './calculate/index';
+import creatureCards from './creatureCards/index';
 
 import { combineReducers, Reducer } from 'redux';
 import { StoreState } from '../types/index';
 
-const reducers: Reducer<StoreState> = combineReducers({settings, drawCards, creatureCards, results});
+export const reducers: Reducer<StoreState> = combineReducers({settings, drawCards, creatureCards, results});
 export default reducers;

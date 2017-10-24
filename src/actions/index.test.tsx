@@ -3,20 +3,71 @@ import * as calcActions from './calculate';
 import * as drawActions from './draw';
 import * as pingActions from './ping';
 import * as settingsActions from './settings';
+import { StoreState } from '../types/index';
 
+const mockState: StoreState = {
+    drawCards: [
+        {
+            id: 0,
+            needed: 1,
+            total: 3
+        }
+    ],
+    creatureCards: [
+        {
+            id: 0,
+            hp: 20,
+            toDie: false,
+            isGod: true
+        },
+    ],
+    settings: {
+        mulligan: false,
+        drawAmount: 20,
+        pingAmount: 4
+    },
+    results: {
+        ping: {
+            desiredOutcomes: 0,
+            timeTaken: 0
+        },
+        draw: {
+            desiredOutcomes: 0,
+            timeTaken: 0
+        }
+    }
+};
 describe('Actions', () => {
     describe('Calculate actions', () => {
         it('should create action to calculate ping', () => {
             const expectedAction = {
-                type: constants.CALCULATE_PING
+                pingAmount: 4,
+                type: constants.CALCULATE_PING,
+                creatureCards: [
+                    {
+                        id: 0,
+                        hp: 20,
+                        toDie: false,
+                        isGod: true
+                    }
+                ]
             };
-            expect(calcActions.calculatePing()).toEqual(expectedAction)
+            expect(calcActions.calculatePing(mockState)).toEqual(expectedAction);
         });
         it('should create action to calculate draw', () => {
             const expectedAction = {
+                drawAmount: 20,
+                mulligan: false,
+                drawCards: [
+                    {
+                        id: 0,
+                        needed: 1,
+                        total: 3
+                    }
+                ],
                 type: constants.CALCULATE_DRAW
             };
-            expect(calcActions.calculateDraw()).toEqual(expectedAction)
+            expect(calcActions.calculateDraw(mockState)).toEqual(expectedAction);
         });
     });
     describe('Draw actions', () => {
@@ -164,9 +215,6 @@ describe('Actions', () => {
                 }
             };
             expect(settingsActions.updateAmount(changeEvt2)).toEqual(expectedAction2);
-        });
-        it('Should create action to update pingAmount', () => {
-
         });
     });
 });

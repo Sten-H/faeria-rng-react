@@ -1,16 +1,16 @@
-import * as constants from '../constants/index';
-import { CreatureCardState } from '../types/index';
-import { InputAction } from '../actions/commonActions';
+import * as constants from '../../constants/index';
+import { CreatureCardState } from '../../types/index';
+import { InputAction } from '../../actions/commonActions';
 
 const god: CreatureCardState = {
     id: 0,
     isGod: true,
     hp: 12,
-    toDie: 0,
+    toDie: false,
 };
 const defaultState: CreatureCardState[] = [
     god,
-    {id: 1, isGod: false, hp: 2, toDie: 1}
+    {id: 1, isGod: false, hp: 2, toDie: true}
 ];
 const updateCreatureCard = (cards: CreatureCardState[], action: InputAction) => {
     return cards.map((card) => {
@@ -33,7 +33,7 @@ export default function creatureCards(state: CreatureCardState[] = defaultState,
         case constants.ADD_INPUT_CARD:
             return [
                 ...state,
-                {id: action.id, hp: 2, toDie: 1, isGod: false}
+                {id: action.id, hp: 2, toDie: true, isGod: false}
             ];
         case constants.REMOVE_INPUT_CARD:
             return state.filter((card) => card.id !== action.id);

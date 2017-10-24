@@ -1,6 +1,6 @@
-import { SettingsState } from '../types/index';
-import { SettingsAction } from '../actions/settings';
-import * as constants from '../constants';
+import { SettingsState } from '../../types/index';
+import { SettingsAction } from '../../actions/settings';
+import * as constants from '../../constants';
 
 /**
  * clamping to actual min value (3) does not work very well because then you can't write 11 for example because

@@ -13,16 +13,16 @@ import InputCard from '../components/InputCard';
 interface CreatureCardProps {
     id: number;
     hp: number;
-    toDie: number;
+    toDie: boolean;
     isGod: boolean;
     onRemove: (id: number ) => void;
     onChange: (id: number, evt: React.SyntheticEvent<HTMLInputElement>) => void;
 }
 
-const getCardClassNames = (toDie: number, isGod: boolean) => {
+const getCardClassNames = (toDie: boolean, isGod: boolean) => {
     let classes = 'input creature';
     classes += (isGod) ? ' god' : '';
-    classes += (Boolean(toDie)) ? ' toDie' : '';
+    classes += (toDie) ? ' toDie' : '';
     return classes;
 };
 
@@ -55,7 +55,7 @@ export const CreatureCard = ({isGod, id, hp, toDie, onRemove, onChange}: Creatur
                             type="select"
                             name="toDie"
                             onChange={(evt) => onChange(id, evt)}
-                            value={toDie}
+                            value={Number(toDie)}
                         >
                             <option value={0}>{'Lives'}</option>
                             <option value={1}>{'Dies'}</option>
@@ -70,7 +70,7 @@ export const CreatureCard = ({isGod, id, hp, toDie, onRemove, onChange}: Creatur
 interface Props {
     id: number;
     hp: number;
-    toDie: number;
+    toDie: boolean;
     isGod: boolean;
 }
 const mapStateToProps = ({creatureCards}: StoreState, {id, hp, toDie, isGod}: Props) => {
