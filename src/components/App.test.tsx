@@ -1,12 +1,37 @@
 import * as React from 'react';
-import * as enzyme from 'enzyme';
-import { App }from './App';
-import { withRouter } from './testHelpers';
+import App from './App';
+import { withStore } from './testHelpers';
+import { StoreState } from '../types/index';
 
+const state: StoreState = {
+    settings: {
+        pingAmount: 3,
+        drawAmount: 20,
+        mulligan: true
+    },
+    creatureCards: [
+    ],
+    drawCards: [
+        {
+            id: 0,
+            needed: 1,
+            total: 3,
+        }
+    ],
+    results: {
+        ping: {
+            desiredOutcomes: 999,
+            timeTaken: 999,
+        },
+        draw: {
+            desiredOutcomes: -1,
+            timeTaken: -1,
+        },
+    }
+};
 describe('App component', () => {
     it('Is renders without crashing', () => {
-        const component = enzyme.mount(withRouter(<App />));
-        expect(component.find('.card-title')).toHaveLength(2);
+        withStore(<App />, state);
     });
 });
 

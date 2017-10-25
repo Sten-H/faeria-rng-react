@@ -4,6 +4,7 @@ import { ResultState } from '../../types/index';
 import calculatePing from './probability_logic/ping-calculation';
 import calculateDraw from './probability_logic/draw-calculation';
 import * as helpers from './probability_logic/helpers';
+import { store } from '../../index';
 
 const resultStateInitValue = {
     draw: {timeTaken: -1, desiredOutcomes: -1},
@@ -30,14 +31,14 @@ export function timeFunction (func: Function, ...args: Array<{}>): Promise<{t: n
 export default function results (result: ResultState = resultStateInitValue, action: CalculateAction) {
     switch (action.type) {
         case constants.CALCULATE_DRAW:
-            const {drawCards, drawAmount} = action;
+            const {settings: { drawAmount }, drawCards} = store.getState();
             const drawProbability = calculateDraw(drawCards, drawAmount);
             return {
                 ...result,
                 draw: {timeTaken: 111, desiredOutcomes: helpers.roundToDecimal(1, drawProbability * 1000)}
             };
         case constants.CALCULATE_PING: {
-            const {creatureCards, pingAmount} = action;
+            const {settings: { pingAmount }, creatureCards} = store.getState();
             const creatureInfo = creatureCards.map((c) => ({id: c.id, hp: c.hp, toDie: Boolean(c.toDie)}));
             const pingProbability = calculatePing(creatureInfo, pingAmount);
             return {

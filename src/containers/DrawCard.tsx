@@ -5,6 +5,7 @@ import { Form, FormGroup, Label, Input, Col } from 'reactstrap';
 import { InputAction } from '../actions/commonActions';
 import { removeDrawCard, updateDrawCard } from '../actions/draw';
 import InputCard from '../components/InputCard';
+import * as R from 'ramda';
 
 /**
  * DrawCard container manages and presents the state of a single card to be drawn in Draw calculation.
@@ -19,7 +20,7 @@ interface DrawCardProps {
 }
 export const DrawCard = ({ id, needed, total, onRemove, onChange}: DrawCardProps) => {
     return (
-        <InputCard className="input" title="Card" onRemove={() => onRemove(id)}>
+        <InputCard className="input draw" title="Card" onRemove={() => onRemove(id)}>
             <Form>
                 <FormGroup row>
                     <Label sm={6}>Need:</Label>
@@ -45,11 +46,13 @@ export const DrawCard = ({ id, needed, total, onRemove, onChange}: DrawCardProps
         </InputCard>
     );
 };
-const mapStateToProps = ({drawCards}: StoreState,   {id, needed, total}: DrawCardState) => {
+interface OwnProps {
+    id: number;
+}
+const mapStateToProps = ({drawCards}: StoreState,   {id}: OwnProps) => {
+    const card = R.find(R.propEq('id', id), drawCards) as DrawCardState;
     return {
-        id,
-        needed,
-        total
+        ...card
     };
 };
 

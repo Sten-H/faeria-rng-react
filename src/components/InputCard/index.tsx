@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Card, CardBody, CardTitle, Button } from 'reactstrap';
-import TiTrash from 'react-icons/lib/ti/trash';
 import { isNil } from 'ramda';
 import './InputCard.css';
 
@@ -10,7 +9,8 @@ const getDeleteButton = (onRemove: () => void) => (
         color="danger"
         onClick={onRemove}
     >
-        Delete <TiTrash size={'2em'} />
+        Delete
+        <span className="typcn typcn-trash"/>
     </Button>);
 
 interface InputCardProps {

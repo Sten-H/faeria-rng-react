@@ -23,6 +23,7 @@ export const DrawSettings = ({drawAmount, mulligan, onChangeDrawAmount, onChange
                 <Label check>
                     <Input
                         type="checkbox"
+                        name="mulligan"
                         checked={mulligan}
                         onChange={onChangeMulligan}
                     />

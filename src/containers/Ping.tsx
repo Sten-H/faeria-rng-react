@@ -26,9 +26,6 @@ export const Ping = ({cards, onAdd}: PingProps) => {
                     <CreatureCard
                         key={card.id}
                         id={card.id}
-                        hp={card.hp}
-                        toDie={card.toDie}
-                        isGod={card.isGod}
                     />)}
             </InputArea>
             <Calculate type={constants.CALCULATE_PING}/>

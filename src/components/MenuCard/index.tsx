@@ -8,7 +8,8 @@ export const MenuCard = () => (
         <CardBody className="pb-0 pt-2">
             <CardTitle>
                 <Link to="/">
-                    Menu{/* FIXME Chevron-left react-icon bugs tests if entered here*/}
+                    <span className="typcn typcn-arrow-left"/>
+                    Menu
                 </Link>
             </CardTitle>
         </CardBody>

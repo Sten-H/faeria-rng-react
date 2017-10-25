@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { StoreState } from '../types/index';
+import { StoreState, CreatureCardState } from '../types/index';
 import { InputAction } from '../actions/commonActions';
 import { Form, FormGroup, Label, Input, Col } from 'reactstrap';
 import { removeCreatureCard, updateCreatureCard } from '../actions/ping';
 import InputCard from '../components/InputCard';
+import * as R from 'ramda';
 
 /**
  * CreatureCard container manages and presents the state of a creature to be pingable in Ping calculation.
@@ -67,18 +68,13 @@ export const CreatureCard = ({isGod, id, hp, toDie, onRemove, onChange}: Creatur
     );
 };
 
-interface Props {
+interface OwnProps {
     id: number;
-    hp: number;
-    toDie: boolean;
-    isGod: boolean;
 }
-const mapStateToProps = ({creatureCards}: StoreState, {id, hp, toDie, isGod}: Props) => {
+const mapStateToProps = ({creatureCards}: StoreState, {id}: OwnProps) => {
+    const creature = R.find(R.propEq('id', id), creatureCards) as CreatureCardState;
     return {
-        id,
-        hp,
-        toDie,
-        isGod
+        ...creature
     };
 };
 

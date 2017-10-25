@@ -4,8 +4,6 @@ import * as actions from '../actions/calculate';
 import * as constants from '../constants';
 import { connect, Dispatch } from 'react-redux';
 import { StoreState } from '../types/index';
-import { store } from '../index';
-
 /**
  * The calculate button will dispatch either calculateDraw or calculatePing depending on which
  * calculate constant was passed as type. Results of calculation will be stored in containers state
@@ -36,7 +34,7 @@ export const Calculate = ({result, onCalculate}: CalculateProps) => {
             </Button>
             <div className="results">
                 <h3>
-                    {styleResult(result.desiredOutcomes)}  out of {styleResult(1000)} games would have desired outcome.
+                    {styleResult(result.desiredOutcomes)} out of {styleResult(1000)} games would have desired outcome
                 </h3>
                 <hr />
                 <p>Completed in {styleResult(result.timeTaken)} seconds</p>
@@ -59,7 +57,7 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.CalculateAction>, 
     return {
         // I use getState in dispatch here instead of in action or reducer because it becomes easier to mock
         // state for tests for those functions. I'm not really sure if this is good choice, feels icky.
-        onCalculate: () => dispatch(relevantFunc(store.getState())),
+        onCalculate: () => dispatch(relevantFunc()),
     };
 }
 

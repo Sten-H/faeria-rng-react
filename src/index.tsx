@@ -10,8 +10,9 @@ import { Provider } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
+import 'typicons.font/src/font/typicons.css';
 
-export const store = createStore<StoreState>(reducers);
+export let store = createStore<StoreState>(reducers);
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

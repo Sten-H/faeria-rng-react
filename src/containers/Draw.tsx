@@ -25,8 +25,6 @@ export const Draw = ({cards, onAdd}: DrawProps) => {
                     <DrawCard
                         key={card.id}
                         id={card.id}
-                        needed={card.needed}
-                        total={card.total}
                     />)}
             </InputArea>
             <Calculate type={constants.CALCULATE_DRAW}/>
