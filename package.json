@@ -1,5 +1,6 @@
 {
-  "name": "react-router",
+  "name": "faeria-rng-react",
+  "homepage": "https://sten-h.github.io/faeria-rng-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +11,7 @@
     "@types/react-test-renderer": "^16.0.0",
     "@types/reactstrap": "^4.6.4",
     "bootstrap": "^4.0.0-beta",
+    "gh-pages": "^1.0.0",
     "ramda": "^0.25.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -22,6 +24,8 @@
     "typicons.font": "^2.0.9"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",

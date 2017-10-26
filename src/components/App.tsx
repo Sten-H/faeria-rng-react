@@ -4,6 +4,10 @@ import { Home } from './Home/index';
 import { Page } from './SiteTemplate';
 import Draw from '../containers/Draw';
 import Ping from '../containers/Ping';
+import { concat } from 'ramda';
+
+// s -> s
+export const getFullUrl = concat(process.env.PUBLIC_URL!);
 
 class MainContainer extends React.Component {
     render() {
@@ -20,9 +24,9 @@ class MainContainer extends React.Component {
 }
 export const routes = (
     <div>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/draw" component={Draw} />
-        <Route exact path="/ping" component={Ping} />
+        <Route exact path={getFullUrl('/')} component={Home} />
+        <Route exact path={getFullUrl('/draw')} component={Draw} />
+        <Route exact path={getFullUrl('/ping')} component={Ping} />
     </div>
 );
 
