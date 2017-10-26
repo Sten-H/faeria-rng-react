@@ -1,0 +1,18 @@
+.faq .question:before {
+    content: "Q: ";
+}
+
+.faq .question {
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+.faq .answer {
+    font-size: 0.9em;
+    margin-top: 0;
+    color: #BCA665;
+    text-indent: 2em;
+}
+.faq {
+    background: rgba(0, 0, 0, 0) !important;
+}

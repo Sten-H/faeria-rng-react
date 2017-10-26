@@ -1,0 +1,40 @@
+{
+  "faq": {
+    "draw": [
+      {
+        "q": "What is this?",
+        "a": "This is a tool to help Faeria players more accurately be able to complain about how unlucky they are not to draw a specific card or a combination of cards."
+      },
+      {
+        "q": "Why can I not draw less than three cards?",
+        "a": "Because three cards is the minimum in any given game. It is the starting hand."
+      },
+      {
+        "q": "How does it work?",
+        "a": "It calculates all possible combinations of cards that can be draw in d draws (30 choose d) and also calculates the number of desirable combination of draws. Then it simply divides desirableDraws with allDraws."
+      },
+      {
+        "q": "What about mulligans?",
+        "a": "I haven't figured out how to extend this algorithm to include mulligans yet. It can be solved by switching to a monte carlo approach to solve it, but it's a bit boring and a lot slower."
+      }
+    ],
+    "ping": [
+      {
+        "q": "What is a ping?",
+        "a": "A ping in card games usually refers to dealing 1 damage. In faeria there are some cards that will send n amount of pings randomly between all enemy creatures and the enemy god (representation of enemy player)."
+      },
+      {
+        "q": "Can a target be damaged beyond its hp?",
+        "a": "No once it has received a ping that brings its hp to 0 it is no longer considered a target for remaining pings. So if you have 4 pings and 2 creatures with 2 hp, they will both die in all outcomes."
+      },
+      {
+        "q": "How does it work?",
+        "a": "It builds a probability tree which branches on each ping, with each branch hitting a unique target. The leaf nodes in the probability tree will have a list of the creatures it hit and the probability to end up in that leaf node. So each creature filters all leaf node outcomes removing leaf nodes that do not match with desires life status of creatures. Then the probability of the reamining leaf nodes are summed to get the final result."
+      },
+      {
+        "q": "Why is performance so bad with high ping amounts and many creatures?",
+        "a": "If creature amount is n and ping amount is k the complexity is O((n^k)n). n^k are the number of outcomes. Each creature then filters the outcomes for only outcomes where its desired status (dead/alive) matches."
+      }
+    ]
+  }
+}

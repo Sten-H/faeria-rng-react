@@ -13,7 +13,7 @@ const Footer = () => (
     <div className="footer float-right">
         <div className="float-right pr-md-3">
             <a
-                href="https://github.com/Sten-H/faeria-rng"
+                href="https://github.com/Sten-H/faeria-rng-react"
                 target="_blank"
             >
                 View on Github
