@@ -9,6 +9,7 @@ Faeria is a collectible card game and as with all card games you are always the 
 This is an older project that I redid with React to get a feel for it. It's made with Typescript, React 
 and Redux for handling state.
 ## TODO
+* Time calculation and 
 * Expand draw algorithm to account for mulligan
 * Restructure reducers. Since the calculate reducer needs to access the entire state for calculations it might need
 to be a parent reducer to all other reducers, I'm not sure. Right not it uses getState() to access entire state

@@ -37,7 +37,8 @@ export const Calculate = ({result, onCalculate}: CalculateProps) => {
                     {styleResult(result.desiredOutcomes)} out of {styleResult(1000)} games would have desired outcome
                 </h3>
                 <hr />
-                <p>Completed in {styleResult(result.timeTaken)} seconds</p>
+                <p>Completed in {styleResult(-1)} seconds</p>
+                {/*<p>Completed in {styleResult(result.timeTaken)} seconds</p>*/}
             </div>
         </div>
     );
